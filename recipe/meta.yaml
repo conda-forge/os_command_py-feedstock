@@ -10,7 +10,7 @@ source:
   sha256: 321d2c0e4c2e547f7e989ef857cc88cebf6900ff2b638ed712072df39d7c16ec
 
 build:
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
   noarch: python
 
@@ -18,15 +18,16 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.5
+    - python {{ python_min }}
   run:
-    - python >=3.5
+    - python >={{ python_min }}
 
 test:
   imports:
     - os_command_py
   requires:
     - pytest
+    - python {{ python_min }}
   commands:
     - pytest --pyargs os_command_py --doctest-modules
 
